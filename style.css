@@ -105,6 +105,17 @@ body {
   min-height: 100vh;
 }
 
+/* #customPrompt {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} */
+
 /* header */
 header {
   padding: 1.2rem;
@@ -198,11 +209,12 @@ section {
   font-size: 16px;
   border: 1px solid black;
   border-radius: 0.4rem;
-  background-image: linear-gradient(to right,
+  background-color: rgb(255, 255, 255);
+  /* background-image: linear-gradient(to right,
       var(--color-1),
       var(--color-2),
       var(--color-3),
-      var(--color-4));
+      var(--color-4)); */
   color: #000;
   outline: none;
   cursor: pointer;
@@ -311,7 +323,7 @@ section {
     grid-template-columns: repeat(var(--columns), 1fr);
     grid-template-rows: masonry;
     grid-auto-flow: dense;
-    background-color: red;
+    /* background-color: red; */
   }
 }
 
@@ -330,14 +342,12 @@ section {
 .card {
   padding: 1rem;
   border: 1px solid var(--fc);
-  border-radius: 10px;
+  border-radius: 0.4rem;
 }
 
 .masonry-layout .card{
-  width: 18rem;
+  width: 22rem;
 }
-
-
 
 button[visible="false"] {
   outline: none;
