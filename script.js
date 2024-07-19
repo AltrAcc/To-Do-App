@@ -68,17 +68,17 @@ function kelvinToCelsius(kelvin) {
     return kelvin - 273.15;
 }
 
-async function fetchTemperature() {
-    const response = await fetch(API);
-    const data = await response.json();
-    document.getElementById("temperature").textContent = `${Math.trunc(
-        kelvinToCelsius(data.main.temp)
-    )}C`;
-    document.getElementById(
-        "temperature-icon"
-    ).src = `images/weather/${data.weather[0].icon}.svg`;
-}
-fetchTemperature(); 
+// async function fetchTemperature() {
+//     const response = await fetch(API);
+//     const data = await response.json();
+//     document.getElementById("temperature").textContent = `${Math.trunc(
+//         kelvinToCelsius(data.main.temp)
+//     )}C`;
+//     document.getElementById(
+//         "temperature-icon"
+//     ).src = `images/weather/${data.weather[0].icon}.svg`;
+// }
+// fetchTemperature(); 
 
 // filer the tasks
 function filterTasks() {
