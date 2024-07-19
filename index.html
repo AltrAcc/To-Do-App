@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Busy day To-Do</title>
+  <link rel="stylesheet" href="style.css" />
+
+</head>
+
+<body>
+  <header>
+    <img src="images/Logo.svg" alt="" class="logo" />
+    <h1>Busy Day</h1>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="flex title">
+        <p class="fs-42 fw-bold">Hello <span id="userName">Janvi</span> !</p>
+        <div class="date">
+          <p id="date"></p>
+          <img src="" alt="" class="icon | temp" id="temperature-icon" />
+          <span id="temperature"></span>
+        </div>
+      </section>
+
+      <section class="flex | filter">
+
+        <button class="add-list-btn flex">
+          <img src="images/add_icon.svg" alt="" class="icon"/> Add new List
+        </button>
+
+        <div class="filter-section">
+          <div class="search">
+            <input type="text" id="search" placeholder="Search your task" aria-visible="true" class="search-todo">
+          </div>
+          <select name="sorting" id="sorting">
+            <option value="" selected disabled hidden>Sort Task</option>
+            <option value="asc">A to Z</option>
+            <option value="desc">Z to A</option>
+            <option value="oldest">Oldest</option>
+            <option value="newest">Newest</option>
+          </select>
+          <select name="filter" id="filter" >
+            <option value="" selected disabled hidden>Filter Task</option>
+            <option value="all">All</option>
+            <option value="pending">Pending</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+
+      </section>
+
+      <section>
+        <ul role="list" class="main-wrapper masonry-layout">
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2024 Busy Day by ScriptedSprouts</p>
+  </footer>
+  <script type="module"  src="script.js"></script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script> -->
