@@ -146,26 +146,64 @@ function setupTaskInput(input, listContainer) {
 }
 
 function setupTaskCheckbox(checkbox) {
-    checkbox.addEventListener("click", function () {
+    checkbox.addEventListener('click', function () {
         filterTasks();
     });
 }
 
-// Delete the task list 
+// Delete the list button
 function setupDeleteButton(button, listContainer) {
     button.addEventListener('click', () => {
         const listId = listContainer.getattribute('list-id');
-    })
-}
-
-
-
-
-
-
-/* 
-        const listId = listContainer.getAttribute('list-id');
         originalTaskOrder.delete(listId);
         listContainer.remove();
     });
-} */
+}
+
+// Delete the task button
+function setupTaskDeleteButton(button) {
+    button.addEventListener("click", function () {
+        const task = button.parentNode;
+        const listId = task.closest(".todo-wrapper").getAttribute('list-id');
+        const taskList = originalTaskOrder.get(listId);
+        taskList.splice(taskList.indexOf(task), 1);
+        task.remove();
+    });
+}
+
+// setting up the date of task 
+function setUpTaskDate(dueDate, dateContainer) {
+    $(dueDate).datepicker({
+        dateFormat: "D M d yy",
+        onSelect: function(dateText) {
+            dateContainer.textContent = decideDay(dateText);
+        }
+    });
+}
+
+// Date selection of task
+mainTodoContainer.addEventListener("click", function(event) {
+    const target = event.target;
+    if (target && target.closest(".cal-btn")) {
+        const todoContainer = target.closest(".todo-wrapper");
+        if (todoContainer) {
+            const dueDate = todoContainer.querySelector(".due-date");
+            const dateDisplay = todoContainer.querySelector('p');
+            setUpTaskDate(dueDate, dateDisplay);
+            $(dueDate).datepicker("show");
+        }
+    }
+});
+
+/* 
+mainTodoContainer.addEventListener('click', (e) => {
+    const target = evemt.target;
+    if(target && target.closet('.cal-btn')) {
+        const todoContainer = target.closet('todo');
+        if(todoContainer) {
+            const duedatte = todoContainer.querySelector('.duedate');
+            const dateDisplay = todoContainer.querySelector(p);
+            setupDeleteButton(duedate, dateDisplay);
+        }
+    }
+}) */
