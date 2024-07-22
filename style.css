@@ -2,25 +2,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap");
 
 :root {
-  --color-1: #fff6e7;
-  --color-2: #e5ffe6;
-  --color-3: #f3e4f7;
-  --color-4: #edbbb4;
-  --color-5: #ececec;
-
-  --fc: #000000;
-  --fc-secondary: #525252;
-
   --ff-main: "Figtree", sans-serif;
 
-  --fw-bold: 750;
-  --fw-semibold: 550;
-  --fw-regular: 300;
+  --fw-bold: 700;
+  --fw-semibold: 500;
+  --fw-regular: 400;
 
   --fs-main: 42px;
   --fs-heading: 24px;
   --fs-todo-heading: 20px;
   --fs-body: 16px;
+
+  --clr-1: #fff6e7;
+  --clr-2: #e5ffe6;
+  --clr-3: #f3e4f7;
+  --clr-4: #edbbb4;
+  --clr-5: #ececec;
+
+  --fc: #000000;
+  --fc-secondary: #525252;
+
 }
 
 *,
@@ -81,23 +82,23 @@ svg {
 }
 
 .bg-color-1 {
-  background-color: var(--color-1);
+  background-color: var(--clr-1);
 }
 
 .bg-color-2 {
-  background-color: var(--color-2);
+  background-color: var(--clr-2);
 }
 
 .bg-color-3 {
-  background-color: var(--color-3);
+  background-color: var(--clr-3);
 }
 
 .bg-color-4 {
-  background-color: var(--color-4);
+  background-color: var(--clr-4);
 }
 
 .bg-color-5 {
-  background-color: var(--color-5);
+  background-color: var(--clr-5);
 }
 
 body {
@@ -126,10 +127,10 @@ header {
   display: flex;
   font-size: var(--fs-heading);
   background-image: linear-gradient(to right,
-      var(--color-1),
-      var(--color-2),
-      var(--color-3),
-      var(--color-4));
+      var(--clr-1),
+      var(--clr-2),
+      var(--clr-3),
+      var(--clr-4));
 }
 
 .container {
@@ -192,7 +193,7 @@ section {
   margin-left: 1rem;
 }
 
-/* Styling for the select dropdown */
+/*select dropdown */
 .filter {
   justify-content: space-between;
   margin-bottom: .8rem;
@@ -211,10 +212,10 @@ section {
   border-radius: 0.4rem;
   background-color: rgb(255, 255, 255);
   /* background-image: linear-gradient(to right,
-      var(--color-1),
-      var(--color-2),
-      var(--color-3),
-      var(--color-4)); */
+      var(--clr-1),
+      var(--clr-2),
+      var(--clr-3),
+      var(--clr-4)); */
   color: #000;
   outline: none;
   cursor: pointer;
@@ -225,7 +226,6 @@ section {
   color: #000;
 }
 
-
 .filter-section select option:hover {
   background-color: #646464;
   color: #000;
@@ -235,8 +235,42 @@ section {
   box-shadow: 0 0 0 0.1rem rgba(0, 0, 0, 0.25);
 }
 
+/* Main section */
 
-/* main */
+/* date picker */
+
+.ui-state-default {
+  text-align: center !important ;
+  border: none !important;
+  background: none !important;
+  font-weight: bold;
+  color: #000000 !important;
+  opacity: .8;
+}
+
+.ui-state-highlight {
+  background: #ebc9f3 !important;
+  color: black !important;
+  border-radius: 18rem !important;
+  opacity: 1;
+}
+
+.ui-state-default:hover{
+  background: var(--clr-3) !important;
+  border-radius: 17rem !important;
+  opacity: 1;
+}
+
+#ui-datepicker-div{
+  background: #f5f5f5 !important;
+}
+
+.ui-state-hover{
+    background: transparent !important;
+    border: none !important;
+    color: #000 !important;
+}
+
 .add-list-btn {
   background-color: var(--fc);
   color: #fff;
@@ -282,8 +316,6 @@ section {
   }
 }
 
-
-
 .masonry-layout{
   display: column;
   columns: 3;
@@ -323,12 +355,10 @@ section {
     grid-template-columns: repeat(var(--columns), 1fr);
     grid-template-rows: masonry;
     grid-auto-flow: dense;
-    /* background-color: red; */
   }
 }
 
 /* todo container */
-
 .todo-wrapper {
   display: flex;
   justify-content: center;
@@ -379,7 +409,6 @@ button:hover {
 .due-date {
   display: none;
 }
-
 
 /* list */
 .todo-item {
@@ -557,47 +586,4 @@ footer {
   .add-list-btn{
     width: fit-content;
   }
-}
-
-/* date picker style  */
-.ui-datepicker .ui-datepicker-header{
-  background-image: linear-gradient(to right,
-  var(--color-4),
-  var(--color-2),
-  var(--color-3),
-  var(--color-4)) !important;
-  border: black;
-  color: black;
-}
-
-.ui-state-default {
-  text-align: center !important ;
-  border: none !important;
-  background: none !important;
-  font-weight: bold;
-  color: #000000 !important;
-  opacity: .8;
-}
-
-.ui-state-highlight {
-  background: #ebc9f3 !important;
-  color: black !important;
-  border-radius: 18rem !important;
-  opacity: 1;
-}
-
-.ui-state-default:hover{
-  background: var(--color-3) !important;
-  border-radius: 17rem !important;
-  opacity: 1;
-}
-
-#ui-datepicker-div{
-  background: #f5f5f5 !important;
-}
-
-.ui-state-hover{
-    background: transparent !important;
-    border: none !important;
-    color: #000 !important;
 }
