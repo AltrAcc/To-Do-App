@@ -1,6 +1,5 @@
-
-const API_KEY = "d255117f9c8684d8449d8a062fc42ad2";
-const API = `https://api.openweathermap.org/data/2.5/weather?lat=22.3039&lon=70.8022&appid=${API_KEY}`; 
+const APIKey = "d255117f9c8684d8449d8a062fc42ad2";
+const API = `https://api.openweathermap.org/data/2.5/weather?lat=22.3039&lon=70.8022&appid=${APIKey}`; 
 
 // Take username
 const userName = prompt("Your Good Name");
@@ -23,33 +22,20 @@ document.getElementById("userName").textContent = userName;
 //     document.getElementById("customPrompt").style.display = "block";
 // };
 
-
 // Fetch DOM elements
-
-const add_new_list = document.querySelector(".add-list-btn");
+const addListNew = document.querySelector(".add-list-btn");
 const mainTodoContainer = document.querySelector(".main-wrapper");
 const filters = document.getElementById("filter");
 const sorting = document.getElementById("sorting");
 const searchInput = document.getElementById('search')
 
-const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const monthsOfYear = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",];
+const WeekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",];
 let totalTodo = 1;
 let originalTaskOrder = new Map();
 
-// date setting function
-function setDate() {
-    var today = new Date();
-    var formattedDate =
-        daysOfWeek[today.getDay()] + ", " +
-        monthsOfYear[today.getMonth()] + " " +
-        today.getDate();
-    document.getElementById("date").textContent = formattedDate;
-}
-setDate();
 
-
-function decideDay(date) {
+function finalDay(date) {
     const today = new Date();
     const dateObj = new Date(date);
     today.setHours(0, 0, 0, 0);
@@ -64,21 +50,32 @@ function decideDay(date) {
     }
 }
 
+// date setting function
+function setDate() {
+    var today = new Date();
+    var formattedDate =
+        WeekDays[today.getDay()] + ", " +
+        months[today.getMonth()] + " " +
+        today.getDate();
+    document.getElementById("date").textContent = formattedDate;
+}
+setDate();
+
 function kelvinToCelsius(kelvin) {
     return kelvin - 273.15;
 }
 
-// async function fetchTemperature() {
-//     const response = await fetch(API);
-//     const data = await response.json();
-//     document.getElementById("temperature").textContent = `${Math.trunc(
-//         kelvinToCelsius(data.main.temp)
-//     )}C`;
-//     document.getElementById(
-//         "temperature-icon"
-//     ).src = `images/weather/${data.weather[0].icon}.svg`;
-// }
-// fetchTemperature(); 
+async function fetchTemperature() {
+    const response = await fetch(API);
+    const data = await response.json();
+    document.getElementById("temperature").textContent = `${Math.trunc(
+        kelvinToCelsius(data.main.temp)
+    )}C`;
+    document.getElementById(
+        "temperature-icon"
+    ).src = `images/weather/${data.weather[0].icon}.svg`;
+}
+fetchTemperature(); 
 
 // filer the tasks
 function filterTasks() {
@@ -104,7 +101,7 @@ filters.addEventListener("change", filterTasks);
 function sortTasks() {
     const sortingValue = sorting.value;
     document.querySelectorAll(".todo-wrapper").forEach((list) => {
-        const mapKey = list.querySelector('h2').textContent;
+        const key = list.querySelector('h2').textContent;
         const tasksArray = Array.from(list.querySelectorAll(".todo-item"));
         tasksArray.sort((a, b) => {
             const aText = a.querySelector(".task-text").innerText.toLowerCase();
@@ -161,7 +158,7 @@ function searchTasks() {
 searchInput.addEventListener('input', searchTasks);
 
 // title setting
-function setupTitle(title) {
+function setTitle(title) {
     title.addEventListener("keypress", function (e) {
         if (e.key === "Enter") {
             e.preventDefault();
@@ -180,7 +177,7 @@ function setupTitle(title) {
 }
 
 // Add new task list
-function addNewList( event, listData = undefined, id = Date.now().toString() , heading = "Add title", date = new Date().toDateString(), contenteditable = true
+function addingListNew( event, listData = undefined, id = Date.now().toString() , heading = "Add title", date = new Date().toDateString(), contenteditable = true
 ) {
     let bg_index = totalTodo % 5 + 1;
     totalTodo++;
@@ -199,10 +196,8 @@ function addNewList( event, listData = undefined, id = Date.now().toString() , h
               <div class="todo-date">
                 <button class="cal-btn" visible="false"><img src="images/calendar.svg" alt="Calendar Icon" class="calendar-icon"></button>
                 <input type="text" class="due-date">
-                <p>${date.startsWith("Today") || date.startsWith("Tomorrow") ?date : decideDay(date)}</p>
+                <p>${date.startsWith("Today") || date.startsWith("Tomorrow") ?date : finalDay(date)}</p>
             </div>
-
-            <input type='date'></input>
 
               <ul class="todo-list" role="list">
             </ul>
@@ -227,20 +222,20 @@ function addNewList( event, listData = undefined, id = Date.now().toString() , h
             <img src="images/close_icon.svg" alt="" class="icon delete-task | delete-icon" />`;
             ul.appendChild(task);
             originalTaskOrder.get(listId).push(task);
-            setupTaskDeleteButton(task.querySelector(".delete-task"));
+            setTaskDeleteButton(task.querySelector(".delete-task"));
             setupTaskCheckbox(task.querySelector(".task-check")); 
         });
     }
     mainTodoContainer.prepend(newTodoContainer);
-    setupTitle(newTodoContainer.querySelector(".editable-title"));
-    setupTaskInput( newTodoContainer.querySelector(".add-new-task"),newTodoContainer);
-    setupDeleteButton(newTodoContainer.querySelector(".delete-list"),newTodoContainer);
+    setTitle(newTodoContainer.querySelector(".editable-title"));
+    setTaskInput( newTodoContainer.querySelector(".add-new-task"),newTodoContainer);
+    setDeleteButton(newTodoContainer.querySelector(".delete-list"),newTodoContainer);
  
 }
-add_new_list.addEventListener("click", addNewList);
+addListNew.addEventListener("click", addingListNew);
 
 // input feild to add new task
-function setupTaskInput(input, listContainer) {
+function setTaskInput(input, listContainer) {
     input.addEventListener("keypress", function (e) {
         if (e.key === "Enter" && input.value.trim() !== "") {
             const newTask = document.createElement("li");
@@ -258,7 +253,7 @@ function setupTaskInput(input, listContainer) {
             }
             originalTaskOrder.get(listId).push(newTask);
             input.value = "";
-            setupTaskDeleteButton(newTask.querySelector(".delete-task"));
+            setTaskDeleteButton(newTask.querySelector(".delete-task"));
             setupTaskCheckbox(newTask.querySelector(".task-check")); // Set up checkbox
         }
     });
@@ -270,8 +265,35 @@ function setupTaskCheckbox(checkbox) {
     });
 }
 
+
+// date selection for task 
+mainTodoContainer.addEventListener("click", function(event) {
+    const target = event.target;
+    if (target && target.closest(".cal-btn")) {
+        const todoContainer = target.closest(".todo-wrapper");
+        if (todoContainer) {
+            const dueDate = todoContainer.querySelector(".due-date");
+            const dateDisplay = todoContainer.querySelector('p');
+            setTaskDate(dueDate, dateDisplay);
+            $(dueDate).datepicker("show");
+        }
+    }
+});
+
+document.querySelectorAll(".delete-list").forEach((list) => {
+    setDeleteButton(list, list.closest(".todo-wrapper"));
+});
+
+document.querySelectorAll(".add-new-task").forEach((input) => {
+    setTaskInput(input, input.closest(".todo-wrapper"));
+});
+
+document.querySelectorAll(".editable-title").forEach((title) => {
+    setTitle(title);
+});
+
 // Delete button for a task deletion
-function setupTaskDeleteButton(button) {
+function setTaskDeleteButton(button) {
     button.addEventListener("click", function () {
         const task = button.parentNode;
         const listId = task.closest(".todo-wrapper").getAttribute('list-id');
@@ -282,7 +304,7 @@ function setupTaskDeleteButton(button) {
 }
 
 // Delete button for list of task
-function setupDeleteButton(button, listContainer) {
+function setDeleteButton(button, listContainer) {
     button.addEventListener("click", function () {
         const listId = listContainer.getAttribute('list-id');
         originalTaskOrder.delete(listId);
@@ -291,37 +313,11 @@ function setupDeleteButton(button, listContainer) {
 }
 
 // set the date of task
-function setUpTaskDate(dueDate, dateContainer) {
+function setTaskDate(dueDate, dateContainer) {
     $(dueDate).datepicker({
         dateFormat: "D M d yy",
         onSelect: function(dateText) {
-            dateContainer.textContent = decideDay(dateText);
+            dateContainer.textContent = finalDay(dateText);
         }
     });
 }
-
-// date selection for task 
-mainTodoContainer.addEventListener("click", function(event) {
-    const target = event.target;
-    if (target && target.closest(".cal-btn")) {
-        const todoContainer = target.closest(".todo-wrapper");
-        if (todoContainer) {
-            const dueDate = todoContainer.querySelector(".due-date");
-            const dateDisplay = todoContainer.querySelector('p');
-            setUpTaskDate(dueDate, dateDisplay);
-            $(dueDate).datepicker("show");
-        }
-    }
-});
-
-document.querySelectorAll(".delete-list").forEach((list) => {
-    setupDeleteButton(list, list.closest(".todo-wrapper"));
-});
-
-document.querySelectorAll(".add-new-task").forEach((input) => {
-    setupTaskInput(input, input.closest(".todo-wrapper"));
-});
-
-document.querySelectorAll(".editable-title").forEach((title) => {
-    setupTitle(title);
-});
