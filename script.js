@@ -177,8 +177,7 @@ function setTitle(title) {
 }
 
 // Add new task list
-function addingListNew( event, listData = undefined, id = Date.now().toString() , heading = "Add title", date = new Date().toDateString(), contenteditable = true
-) {
+function addingListNew(event, listData = undefined, id = Date.now().toString(), heading = "Add title", date = new Date().toDateString(), contenteditable = true) {
     let bg_index = totalTodo % 5 + 1;
     totalTodo++;
     const newTodoContainer = document.createElement("li");
@@ -187,7 +186,7 @@ function addingListNew( event, listData = undefined, id = Date.now().toString() 
     newTodoContainer.innerHTML = `
         <div class="card bg-color-${bg_index}">
               <div class="todo-header flex">
-                <h2 class="fs-todo-heading | editable-title" contenteditable=${contenteditable}>${heading}</h2>
+                <input type="text" class="fs-todo-heading editable-title bg-color-${bg_index}" placeholder="${heading}" value="${heading !== 'Add title' ? heading : ''}" />
                 <button visible="false" class="delete-list">
                   <img src="images/delete_icon.svg" alt="" />
                 </button>
@@ -196,7 +195,7 @@ function addingListNew( event, listData = undefined, id = Date.now().toString() 
               <div class="todo-date">
                 <button class="cal-btn" visible="false"><img src="images/calendar.svg" alt="Calendar Icon" class="calendar-icon"></button>
                 <input type="text" class="due-date">
-                <p>${date.startsWith("Today") || date.startsWith("Tomorrow") ?date : finalDay(date)}</p>
+                <p>${date.startsWith("Today") || date.startsWith("Tomorrow") ? date : finalDay(date)}</p>
             </div>
 
               <ul class="todo-list" role="list">
@@ -216,23 +215,22 @@ function addingListNew( event, listData = undefined, id = Date.now().toString() 
             task.setAttribute("data-created", taskData.created);
             task.classList.add("todo-item");
             task.innerHTML = `
-            <input type="checkbox" ${taskData.completed ? "checked" : ""
-                } class="task-check"> 
+            <input type="checkbox" ${taskData.completed ? "checked" : ""} class="task-check"> 
             <span class="task-text">${taskData.text}</span> 
             <img src="images/close_icon.svg" alt="" class="icon delete-task | delete-icon" />`;
             ul.appendChild(task);
             originalTaskOrder.get(listId).push(task);
             setTaskDeleteButton(task.querySelector(".delete-task"));
-            setupTaskCheckbox(task.querySelector(".task-check")); 
+            setupTaskCheckbox(task.querySelector(".task-check"));
         });
     }
     mainTodoContainer.prepend(newTodoContainer);
     setTitle(newTodoContainer.querySelector(".editable-title"));
-    setTaskInput( newTodoContainer.querySelector(".add-new-task"),newTodoContainer);
-    setDeleteButton(newTodoContainer.querySelector(".delete-list"),newTodoContainer);
- 
+    setTaskInput(newTodoContainer.querySelector(".add-new-task"), newTodoContainer);
+    setDeleteButton(newTodoContainer.querySelector(".delete-list"), newTodoContainer);
 }
 addListNew.addEventListener("click", addingListNew);
+
 
 // input feild to add new task
 function setTaskInput(input, listContainer) {
