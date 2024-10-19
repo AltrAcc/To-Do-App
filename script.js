@@ -1,9 +1,17 @@
 const APIKey = "d255117f9c8684d8449d8a062fc42ad2";
 const API = `https://api.openweathermap.org/data/2.5/weather?lat=22.3039&lon=70.8022&appid=${APIKey}`; 
 
-// Take username
-const userName = prompt("Your Good Name");
-document.getElementById("userName").textContent = userName;
+// // Take username
+// const userName = prompt("Your Good Name");
+// document.getElementById("userName").textContent = userName;
+
+// Get User name
+if (!localStorage.getItem("userName")) {
+    const userName = prompt("Your Good Name");
+    localStorage.setItem("userName", userName);
+}
+const user = localStorage.getItem("userName");
+document.getElementById("userName").textContent = user;
 
 // Username prompt
 // function submitUsername() {
